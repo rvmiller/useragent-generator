@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/useragent/generator'
+require File.dirname(__FILE__) + '/useragent/config'
 
 module UserAgent
 

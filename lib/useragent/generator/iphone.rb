@@ -60,7 +60,7 @@ module UserAgent
           os_version = "8.0" if os_version.nil?
           "Apple-iPhone7C1/#{IOS.build(os_version)}"
 
-        else raise "unsupported iPhone model: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported iPhone model: '#{model}'")
       end
     end
 

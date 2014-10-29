@@ -57,9 +57,16 @@ end
 
 describe "#samsung_user_agent_factory" do
 
-  it "-> gets a default samsung user agent" do
+  it "-> gets a default samsung user agent when no model is requested" do
     user_agent = UserAgent.generate(os_type: :android,
                                     device: :samsung)
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; SCH-I535 Build/FRG83G) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
+  end
+
+  it "-> gets a default samsung user agent" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :samsung,
+                                    model: :default)
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; SCH-I535 Build/FRG83G) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
   end
 
@@ -178,9 +185,16 @@ end
 
 describe "#htc_user_agent_factory" do
 
-  it "-> gets a default htc user agent" do
+  it "-> gets a default htc user agent when no model is requested" do
     user_agent = UserAgent.generate(os_type: :android,
                                     device: :htc)
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; ADR6300 Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
+  end
+
+  it "-> gets a default htc user agent" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: :default)
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; ADR6300 Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
   end
 
@@ -280,9 +294,16 @@ end
 
 describe "#lg_user_agent_factory" do
 
-  it "-> gets a default lg user agent" do
+  it "-> gets a default lg user agent when no model is given" do
     user_agent = UserAgent.generate(os_type: :android,
                                     device: :lg)
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; LG-D855 Build/FRG83G) AppleWebKit/537.16 (KHTML, like Gecko) Version/4.0 Mobile")
+  end
+
+  it "-> gets a default lg user agent" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :lg,
+                                    model: :default)
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; LG-D855 Build/FRG83G) AppleWebKit/537.16 (KHTML, like Gecko) Version/4.0 Mobile")
   end
 
@@ -382,6 +403,13 @@ describe "#motorola_user_agent_factory" do
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; DROIDX Build/FRG83G) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17 480X854 motorola DROIDX")
   end
 
+  it "-> gets a default motorola user agent" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :motorola,
+                                    model: :default)
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.2; en-us; DROIDX Build/FRG83G) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17 480X854 motorola DROIDX")
+  end
+
   it "-> gets a versioned default user agent for motorola" do
     user_agent = UserAgent.generate(os_type: :android,
                                     device: :motorola,
@@ -463,5 +491,92 @@ describe "#iphone_user_agent_factory" do
                                     language: 'de-de',
                                     os_version: '4.2.5')
     expect(user_agent).to eq("Apple-iPhone4C1/805.128")
+  end
+end
+
+describe "#user_agent_exception_handlers" do
+
+  it "-> throws a InvalidInput exception when input is not a hash" do
+    expect{UserAgent.generate(:ios)}.to raise_error(UserAgent::InvalidInput)
+  end
+
+  it "-> throws a InvalidInput exception when os is missing" do
+    expect{UserAgent.generate(device: :ios, model: 'iPhone 4S')}.to raise_error(UserAgent::InvalidInput)
+  end
+
+  it "-> throws a UnsupportedOS exception when the os is not supported" do
+    expect{UserAgent.generate(os_type: :not_an_os)}.to raise_error(UserAgent::UnsupportedOS)
+  end
+
+  it "-> throws a NotImplemented exception when the random method is called" do
+    expect{UserAgent.random}.to raise_error(UserAgent::NotImplemented)
+  end
+
+  it "-> throws a UnsupportedOS exception when the os is not supported" do
+    expect{UserAgent.generate(os_type: :not_an_os)}.to raise_error(UserAgent::UnsupportedOS)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown android device is requested" do
+    expect{UserAgent.generate(os_type: :android, device: :who_are_you)}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown android device is requested" do
+    expect{UserAgent.generate(os_type: :android, device: 'some_weird_manufacturer')}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown android device is requested" do
+    expect{UserAgent.generate(os_type: :android, device: ['some', 'weird', 'manufacturer', 'array'])}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown ios device is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: :who_are_you)}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown ios device is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: 'some_weird_manufacturer')}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown ios device is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: ['some', 'weird', 'manufacturer', 'array'])}.to raise_error(UserAgent::UnsupportedDevice)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown blackberry model is requested" do
+    expect{UserAgent.generate(os_type: :blackberry, model: :who_are_you)}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown blackberry model is requested" do
+    expect{UserAgent.generate(os_type: :blackberry, model: 'some_weird_manufacturer')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDevice exception when an unknown blackberry model is requested" do
+    expect{UserAgent.generate(os_type: :blackberry, model: ['some', 'weird', 'manufacturer', 'array'])}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown samsung model is requested" do
+    expect{UserAgent.generate(os_type: :android, device: :samsung, model: 'LOL DNR')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown htc model is requested" do
+    expect{UserAgent.generate(os_type: :android, device: :htc, model: 'LOL DNR')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown lg model is requested" do
+    expect{UserAgent.generate(os_type: :android, device: :lg, model: 'LOL DNR')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown motorola model is requested" do
+    expect{UserAgent.generate(os_type: :android, device: :motorola, model: 'LOL DNR')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown iphone model is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: :iphone, model: 'LOL DNR')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown ipad model is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: :ipad, model: 'G3')}.to raise_error(UserAgent::UnsupportedDeviceModel)
+  end
+
+  it "-> throws a UnsupportedDeviceModel exception when an unknown ipod model is requested" do
+    expect{UserAgent.generate(os_type: :ios, device: :ipod, model: 'iPhone 4S')}.to raise_error(UserAgent::UnsupportedDeviceModel)
   end
 end

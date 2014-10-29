@@ -52,7 +52,7 @@ module UserAgent
         when /Playbook/i
           "Mozilla/5.0 (PlayBook; U; RIM Tablet OS #{version}; #{language}) AppleWebKit/535.8+ (KHTML, like Gecko) Version/#{version} Safari/535.8+"
 
-        else raise "unsupported Blackberry device: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported Blackberry device: '#{model}'")
       end
     end
 

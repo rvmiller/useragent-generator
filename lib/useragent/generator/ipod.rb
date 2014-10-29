@@ -29,7 +29,7 @@ module UserAgent
         when "iPod5", "iPod Touch 5"
           "Apple-iPod5C1/#{IOS.build(os_version)}"
 
-        else raise "unsupported iPod model: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported iPod model: '#{model}'")
       end
     end
   end

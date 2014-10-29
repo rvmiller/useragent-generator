@@ -60,7 +60,7 @@ module UserAgent
           os_version = "4.0.4" if os_version.nil?
           "#{Android.platform os_version, language, 'HTC_One_X'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
 
-        else raise "unsupported HTC device: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported HTC device: '#{model}'")
       end
     end
 

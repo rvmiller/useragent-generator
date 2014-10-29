@@ -39,7 +39,7 @@ module UserAgent
           os_version = "2.1" if os_version.nil?
           "#{Android.platform os_version, language, 'Droid'} #{Webkit.apple('530.17', '4.0')} #{Webkit.safari('530.17')}"
 
-        else raise "unsupported Motorola device: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported Motorola device: '#{model}'")
       end
     end
 

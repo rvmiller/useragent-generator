@@ -51,7 +51,7 @@ module UserAgent
           os_version = "4.2.2" if os_version.nil?
           "#{Android.platform os_version, language, 'LG-D950/D95008m'} #{Webkit.apple('534.30', '4.2')} #{Webkit.safari('537.36')}"
 
-        else "unsupported LG device: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported LG device: '#{model}'")
       end
     end
 

@@ -96,7 +96,7 @@ module UserAgent
           os_version = "4.3.1" if os_version.nil?
           "#{Android.platform os_version, language, 'SAMSUNG SM-G910S'} #{Webkit.apple('537.36', '4.0')} #{Webkit.chrome('38.0.2125.102')} #{Webkit.safari('537.36')}"
 
-        else raise "unsupported device: '#{model}'"
+        else raise UnsupportedDeviceModel.new("unsupported device: '#{model}'")
       end
     end
 

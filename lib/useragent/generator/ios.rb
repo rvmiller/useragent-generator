@@ -12,7 +12,7 @@ module UserAgent
         when :iphone;  Iphone.user_agent(args)
         when :ipad;    Ipad.user_agent(args)
         when :ipod;    Ipod.user_agent(args)
-        else raise "unsupported ios device: #{device}"
+        else raise UnsupportedDevice.new("unsupported ios device: #{device}")
       end
     end
 
@@ -21,11 +21,9 @@ module UserAgent
     end
 
     def self.build(version)
-      # TODO: custom error messaging
-      raise "no version specified, you must provide a version" if version.nil?
+      raise InvalidInput.new("no version specified, you must provide a version") if version.nil?
       version_id = Config.parse(:ios, version)
-      # TODO: custom error messaging
-      raise "unsupported version '#{version}'" if version_id.nil?
+      raise UnsupportedVersion.new("unsupported version '#{version}'") if version_id.nil?
       version_id
     end
 

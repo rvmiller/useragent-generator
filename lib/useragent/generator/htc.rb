@@ -1,14 +1,15 @@
 module UserAgent
   module HTC
 
+    # TODO: get this from yml
     def self.default_version
       "2.3.4"
     end
 
     def self.default_user_agent(args)
-      version  = args.fetch(:os_version, default_version)
-      language = args.fetch(:language, UserAgent.default_language)
-      "Mozilla/5.0 (Linux; U; Android #{version}; #{language}; ADR6300 #{Android.build(version)}) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+      os_version = args.fetch(:os_version, default_version)
+      language   = args.fetch(:language, UserAgent.default_language)
+      "#{Android.platform os_version, language, 'ADR6300'} #{Webkit.apple('533.1', '4.0')} #{Webkit.safari('533.1')}"
     end
 
     def self.user_agent(args)

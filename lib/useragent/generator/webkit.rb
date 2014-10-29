@@ -13,5 +13,9 @@ module UserAgent
       "Chrome/#{build}"
     end
 
+    def self.mercury(build)
+      "Mercury/#{build}"
+    end
+
   end
 end

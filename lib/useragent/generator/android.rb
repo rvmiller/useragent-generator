@@ -23,6 +23,10 @@ module UserAgent
       Samsung.user_agent(args)
     end
 
+    def self.platform(ver, lang, arch)
+      "Mozilla/5.0 (Linux; U; Android #{ver}; #{lang}; #{arch} #{Android.build(ver)})"
+    end
+
     def self.build(version)
       # TODO: custom error messaging
       raise "no version specified, you must provide a version" if version.nil?

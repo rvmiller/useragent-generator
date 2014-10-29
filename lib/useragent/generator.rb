@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/generator/version'
 require File.dirname(__FILE__) + '/generator/android'
 require File.dirname(__FILE__) + '/generator/ios'
+require File.dirname(__FILE__) + '/generator/webkit'
 require File.dirname(__FILE__) + '/generator/blackberry'
 
 module UserAgent

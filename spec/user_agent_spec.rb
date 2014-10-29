@@ -111,7 +111,7 @@ describe "#htc_user_agent_factory" do
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.1.1; es-es; ADR6300 Build/JRO03S) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
   end
 
-  it "-> gets a user agent string for a HTC Sensation" do
+  it "-> gets a user agent string for an HTC Sensation" do
     user_agent = UserAgent.generate(os_type: :android,
                                     device: :htc,
                                     model: 'Sensation',
@@ -119,6 +119,75 @@ describe "#htc_user_agent_factory" do
                                     os_version: '2.2.1')
     expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.2.1; de-de; Sensation_Z710e Build/FRG83D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
   end
+
+  it "-> gets a user agent string for an HTC One X" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'One X')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; HTC_One_X Build/IMM76L) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
+  end
+
+  it "-> gets a user agent string for an HTC Desire" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Desire')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; HTC Desire Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
+  end
+
+  it "-> gets a user agent string for an HTC Desire S" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Desire S',
+                                    language: 'en-gb',
+                                    os_version: '4.1')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.1; en-gb; HTC_DesireS_S510e Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
+  end
+
+  it "-> gets a user agent string for an HTC Desire X" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Desire X')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; HTC Desire X Build/JRO03S) AppleWebKit/537.30 (KHTML, like Gecko) Version/4.0 Chrome/31.0.1650.59 Mobile Safari/537.36")
+  end
+
+  it "-> gets a user agent string for an HTC Desire Z" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Desire Z',
+                                    language: 'nl-nl',
+                                    os_version: '2.3.3')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.3.3; nl-nl; HTC_DesireZ_A7272 Build/GRI54) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
+  end
+
+  it "-> gets a user agent string for an HTC EVO" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'EVO')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; EVO Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
+  end
+
+  it "-> gets a user agent string for an HTC EVO 3D" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'EVO 3D',
+                                    os_version: '4.0.3')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; Sprint APX515CKT Build/IML77) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30")
+  end
+
+  it "-> gets a user agent string for an HTC Droid Incredible" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Droid Incredible')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; ADR6300 Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1")
+  end
+
+  it "-> gets a user agent string for an HTC Droid Eris" do
+    user_agent = UserAgent.generate(os_type: :android,
+                                    device: :htc,
+                                    model: 'Droid Eris')
+    expect(user_agent).to eq("Mozilla/5.0 (Linux; U; Android 4.0.1; en-us; ADR6200 Build/ITL41F) AppleWebKit/528.5 (KHTML, like Gecko) Version/3.1.2 Mobile Safari/528.5")
+  end
+
 end
 
 describe "#lg_user_agent_factory" do

@@ -21,19 +21,43 @@ module UserAgent
 
         when 'Sensation'
           os_version = "4.0.3" if os_version.nil?
-          "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; Sensation_Z710e #{Android.build(os_version)}) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"
+          "#{Android.platform os_version, language, 'Sensation_Z710e'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
+
+        when "Desire"
+          os_version = "2.3.4" if os_version.nil?
+          "#{Android.platform os_version, language, 'HTC Desire'} #{Webkit.apple('533.1', '4.0')} #{Webkit.safari('533.1')}"
+
+        when "Desire S"
+          os_version = "4.0.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'HTC_DesireS_S510e'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
+
+        when "Desire X"
+          os_version = "4.1.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'HTC Desire X'} #{Webkit.apple('537.30', '4.0')} #{Webkit.chrome('31.0.1650.59')} #{Webkit.safari('537.36')}"
+
+        when "Desire Z"
+          os_version = "2.3.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'HTC_DesireZ_A7272'} #{Webkit.apple('533.1', '4.0')} #{Webkit.safari('533.1')}"
+
+        when "EVO"
+          os_version = "4.1.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'EVO'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
+
+        when "EVO 3D"
+          os_version = "4.0.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'Sprint APX515CKT'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
 
         when "Droid Incredible"
           os_version = "2.3.4" if os_version.nil?
-          "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; ADR6300 #{Android.build(os_version)}) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+          "#{Android.platform os_version, language, 'ADR6300'} #{Webkit.apple('533.1', '4.0')} #{Webkit.safari('533.1')}"
 
         when "Droid Eris"
-          os_version = "1.5" if os_version.nil?
-          "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; ADR6200 #{Android.build(os_version)}) AppleWebKit/528.5+(KHTML, like Gecko) Version/3.1.2"
+          os_version = "4.0.1" if os_version.nil?
+          "#{Android.platform os_version, language, 'ADR6200'} #{Webkit.apple('528.5', '3.1.2')} #{Webkit.safari('528.5')}"
 
         when "One X"
           os_version = "4.0.4" if os_version.nil?
-          "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; HTC_One_X #{Android.build(os_version)}) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0"
+          "#{Android.platform os_version, language, 'HTC_One_X'} #{Webkit.apple('534.30', '4.0')} #{Webkit.safari('534.30')}"
 
         else raise "unsupported HTC device: '#{model}'"
       end

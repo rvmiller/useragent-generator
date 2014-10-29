@@ -39,6 +39,10 @@ module UserAgent
           os_version = "4.2.1" if os_version.nil?
           "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; LG-D855 #{Android.build(os_version)}) AppleWebKit/537.16 (KHTML, like Gecko) Version/4.0 Mobile"
 
+        when "G2"
+          os_version = "4.2.1" if os_version.nil?
+          "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; LG-D802 #{Android.build(os_version)}) AppleWebKit/537.16 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.16"
+
         when "Vista"
           os_version = "4.4.1" if os_version.nil?
           "Mozilla/5.0 (Linux; U; Android #{os_version}; #{language}; LG-D631/D63108g #{Android.build(os_version)}) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36"
